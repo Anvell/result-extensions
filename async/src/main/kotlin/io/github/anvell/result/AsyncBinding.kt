@@ -9,6 +9,12 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * Allows to compose a set of [Result] values in an imperative way
+ * using suspendable [bind][ResultCoroutineScope.bind] function.
+ *
+ * Result is returned as  [Deferred] object.
+ */
 fun <T> CoroutineScope.bindingAsync(
     block: suspend ResultCoroutineScope.() -> T
 ): Deferred<Result<T>> = async {

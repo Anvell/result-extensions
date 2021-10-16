@@ -2,6 +2,10 @@
 
 package io.github.anvell.result
 
+/**
+ * Allows to compose a set of [Result] values in an imperative way
+ * using [bind][ResultBindingScope.bind] function.
+ */
 inline fun <T> binding(
     crossinline block: ResultBindingScope.() -> T
 ): Result<T> = with(ResultBindingScope()) {
