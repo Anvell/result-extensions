@@ -1,5 +1,5 @@
 plugins {
-    id "com.diffplug.spotless" version "5.11.1"
+    id "com.diffplug.spotless" version "5.17.0"
 }
 
 subprojects {
@@ -10,7 +10,7 @@ subprojects {
             targetExclude("$buildDir/**/*.kt")
             targetExclude('bin/**/*.kt')
 
-            ktlint("0.41.0") userData 'disabled_rules': 'no-wildcard-imports'
+            ktlint("0.42.1") userData 'disabled_rules': 'no-wildcard-imports'
         }
     }
 }

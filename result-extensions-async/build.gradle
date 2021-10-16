@@ -13,8 +13,8 @@ repositories {
 dependencies {
     implementation project(":result-extensions")
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
 
     testImplementation "junit:junit:4.13.2"
-    testImplementation "io.kotest:kotest-assertions-core-jvm:4.4.3"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:4.6.3"
 }

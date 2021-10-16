@@ -12,5 +12,5 @@ repositories {
 
 dependencies {
     testImplementation "junit:junit:4.13.2"
-    testImplementation "io.kotest:kotest-assertions-core-jvm:4.4.3"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:4.6.3"
 }
