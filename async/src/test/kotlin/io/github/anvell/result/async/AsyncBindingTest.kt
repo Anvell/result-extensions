@@ -1,4 +1,4 @@
-package io.github.anvell.result
+package io.github.anvell.result.async
 
 import io.kotest.matchers.shouldBe
 import kotlinx.coroutines.async

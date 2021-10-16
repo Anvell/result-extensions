@@ -1,10 +1,8 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE")
 
-package io.github.anvell.result
+package io.github.anvell.result.async
 
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.async
+import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.coroutines.CoroutineContext
@@ -16,15 +14,30 @@ import kotlin.coroutines.CoroutineContext
  * Result is returned as  [Deferred] object.
  */
 fun <T> CoroutineScope.bindingAsync(
+    start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend ResultCoroutineScope.() -> T
-): Deferred<Result<T>> = async {
+): Deferred<Result<T>> = async(start = start) {
     with(ResultCoroutineScope(coroutineContext)) {
         try {
             Result.success(block())
         } catch (e: BindingCoroutineException) {
-            Result.failure(
-                requireNotNull(error)
-            )
+            Result.failure(requireNotNull(error))
+        }
+    }
+}
+
+/**
+ * Allows to compose a set of [Result] values in an imperative way
+ * using suspendable [bind][ResultCoroutineScope.bind] function.
+ */
+suspend fun <T> binding(
+    block: suspend ResultCoroutineScope.() -> T
+): Result<T> = coroutineScope {
+    with(ResultCoroutineScope(coroutineContext)) {
+        try {
+            Result.success(block())
+        } catch (e: BindingCoroutineException) {
+            Result.failure(requireNotNull(error))
         }
     }
 }
