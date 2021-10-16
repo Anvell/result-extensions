@@ -9,12 +9,12 @@ package io.github.anvell.result
  *
  * Note, that this function rethrows any [Throwable] exception thrown by [transform] function.
  */
-inline fun <R, T : R> Result<T>.flatMap(
+inline fun <R, T> Result<T>.flatMap(
     transform: (value: T) -> Result<R>
-): Result<R> = when {
-    isSuccess -> transform(getOrThrow())
-    else -> this
-}
+): Result<R> = fold(
+    onSuccess = { value -> transform(value) },
+    onFailure = { error -> Result.failure(error) }
+)
 
 /**
  * Returns the encapsulated value if this instance represents [success][Result.isSuccess] or the
