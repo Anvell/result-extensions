@@ -1,4 +1,4 @@
 rootProject.name = "result-extensions"
 
-include ':result-extensions'
-include ':result-extensions-async'
+include ':core'
+include ':async'

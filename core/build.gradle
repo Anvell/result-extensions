@@ -1,0 +1,46 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.5.31"
+    id "java-library"
+    id "maven-publish"
+}
+
+def ArtifactId = "core"
+
+group = ArtifactGroup
+version = ArtifactVersion
+
+repositories {
+    mavenCentral()
+}
+
+tasks.named("jar") {
+    manifest {
+        attributes(
+                "Implementation-Title": project.name,
+                "Implementation-Version": project.version
+        )
+    }
+}
+
+task sourceJar(type: Jar) {
+    classifier "sources"
+    from sourceSets.main.allSource
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            artifactId = ArtifactId
+            groupId = ArtifactGroup
+            version = ArtifactVersion
+
+            from components.java
+            artifact tasks.sourceJar
+        }
+    }
+}
+
+dependencies {
+    testImplementation "junit:junit:4.13.2"
+    testImplementation "io.kotest:kotest-assertions-core-jvm:4.6.3"
+}
