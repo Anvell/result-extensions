@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.5.31"
+    id "org.jetbrains.kotlin.jvm" version "1.6.10"
     id "java-library"
     id "maven-publish"
 }
@@ -43,7 +43,7 @@ publishing {
 dependencies {
     implementation project(":core")
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0"
 
     testImplementation "junit:junit:4.13.2"
     testImplementation "io.kotest:kotest-assertions-core-jvm:4.6.3"
